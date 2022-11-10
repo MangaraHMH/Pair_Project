@@ -48,16 +48,17 @@ class ProfileController {
     }
 
     static renderUserProfile(req, res) {
-        const id = +req.params.id
-        Profile.findOne({
-            include: {
-                model: User,
-                include: {
-                    model:Post  
+        const { UserId } = req.session
+        User.findByPk(UserId, {
+            include: [
+                {
+                    model: Post,
+                },
+                {
+                    model: Profile
                 }
-            }
-        }, {where: {id : id}})
-
+            ]
+        })
         .then(data => {
             res.render('userProfile', { data })
         })

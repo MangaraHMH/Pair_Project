@@ -27,7 +27,7 @@
           <div class="flex justify-center">
             <div class="relative">
                 
-              <img src="<%= data.profilePicture %>" class="rounded-full" width="80">
+              <img src="<%= data.Profile.profilePicture %>" class="rounded-full" width="80">
             <span class="absolute border-white border-4 h-5 w-5 top-12 left-16 bg-green-700 rounded-full"></span>
             
               
@@ -37,18 +37,24 @@
   
           <div class="flex flex-col text-center mt-3 mb-4">
   
-            <span class="text-2xl font-medium"><%= data.userName %></span>
-            <span class="text-md text-gray-400">@<%= data.User.email %></span>
+            <span class="text-2xl font-medium"><%= data.Profile.userName %></span>
+            <span class="text-md text-gray-400">@<%= data.email %></span>
             
           </div>
   
-           <p class="px-16 text-center text-md text-gray-800"><%= data.bio %></p>
+           <p class="px-16 text-center text-md text-gray-800"><%= data.Profile.bio %></p>
   
            <div class="px-16 mt-3 text-center">
              
-             <span class="bg-gray-100 h-5 p-1 px-3 rounded cursor-pointer hover:shadow hover:bg-gray-200">#<%= data.hobby %></span>
+             <span class="bg-gray-100 h-5 p-1 px-3 rounded cursor-pointer hover:shadow hover:bg-gray-200">#<%= data.Profile.hobby %></span>
              
            </div>
+           
+           <div class="px-16 mt-3 text-center">
+             
+            <span class="bg-gray-100 h-5 p-1 px-3 rounded cursor-pointer hover:shadow hover:bg-gray-200">#<%= data.Profile.birthDate %></span>
+            
+          </div>
               
            <div class="px-14 mt-5">
   
