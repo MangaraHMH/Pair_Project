@@ -10,18 +10,20 @@
 <body>
     <% if (errors) { %>
         <% errors.split(',').forEach( x=> { %>
-          <p style="color: red; margin-left: 50px;">
-            <%= x %>
-          </p>
+            <div class="alert alert-danger" role="alert">
+                <%= x %>!
+              </div>
           <% }) %>
             <% } %>
-        <form action="" method="post">
-            <div class="form-floating" style="margin-top: 30px;">
-                <textarea name="caption" class="form-control" style="width:600px; height: 60px;" id="caption" maxlength="255" cols="30" rows="10"></textarea> <br> 
-                <label for="caption">Your Caption</label>
+            <div style="margin-left:25%; margin-top:15%">
+                <form action="" method="post">
+                    <div class="form-floating" style="margin-top: 30px;">
+                        <textarea name="caption" class="form-control" style="width:600px; height: 60px;" id="caption" maxlength="255" cols="30" rows="10"></textarea> <br> 
+                        <label for="caption">Your Caption</label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Post</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-outline-primary">Post</button>
-        </form>
 
 </body>
 </html>

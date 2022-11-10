@@ -34,8 +34,9 @@ class ProfileController {
 
     static editProfile(req, res) {
         const id = +req.params.id
-        const { userName, profilePicture, bio, phoneNumber, birthDate, hobby} = req.body
-        Profile.update({ userName, profilePicture, bio, phoneNumber, birthDate, hobby }, {where :{UserId : id}})
+        let { filename } = req.file
+        const { userName, bio, phoneNumber, birthDate, hobby} = req.body
+        Profile.update({ userName, profilePicture:filename, bio, phoneNumber, birthDate, hobby }, {where :{UserId : id}})
         .then((_) => {
             res.redirect('/user/profile')
         })

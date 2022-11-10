@@ -9,6 +9,13 @@
 </head>
 <body>
     <h1 style="margin-left:32%">Register your Account</h1>
+    <% if (errors) { %>
+        <% errors.split(',').forEach( x=> { %>
+            <div class="alert alert-danger" role="alert">
+                <%= x %>!
+              </div>
+          <% }) %>
+            <% } %>
     <form  method="post">
         <div class="container">
 

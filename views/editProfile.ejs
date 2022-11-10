@@ -11,14 +11,14 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="https://toppng.com/uploads/preview/squidward-wallpaper-handsome-squidward-transparent-115633722416pqvpicdi6.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="https://www.kindpng.com/picc/m/553-5530904_phoenix-bird-hd-png-download.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
             Tweetward
           </a>
           <a href="" class="nav-link active">Logout</a>
         </div>
       </nav>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="container">
   <<% data.forEach(x => { %>
    
@@ -29,7 +29,7 @@
 
             <div class="form-group">
               <label for="picture">Profile Picture</label>
-              <input type="text" class="form-control" name="profilePicture" value="<%= x.profilePicture %> " id="picture" placeholder="profile picture URL">
+              <input type="file" class="form-control" name="profilePicture" value="<%= x.profilePicture %> " id="picture" placeholder="profile picture">
             </div>
             <div class="form-group">
                 <label for="bio">Bio</label>
