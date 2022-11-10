@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcryptjs')
 const {
   Model
 } = require('sequelize');
@@ -19,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     role: DataTypes.INTEGER
+  }, {
+    
   }, {
     sequelize,
     modelName: 'User',
