@@ -15,7 +15,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Post.init({
-    caption: DataTypes.STRING,
+    caption: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg:'Please add your caption'
+        },
+        notEmpty: {
+          msg:'Please add your caption'
+        }
+  
+      }
+    },
     like: DataTypes.INTEGER,
     UserId: DataTypes.INTEGER
   }, {
