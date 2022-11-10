@@ -1,5 +1,9 @@
-const { User, Post, Profile } = require('../models')
+
 const  bcrypt = require('bcryptjs')
+
+const { Op } = require('sequelize')
+const {User, Profile, Post} = require('../models')
+
 
 class UserController {
     static renderRegister(req, res) {
@@ -44,11 +48,33 @@ class UserController {
     }
 
     static renderHomePage(req, res) {
-        res.render('homePage')
+        const { search } = req.query
+        const option = {}
+        if (search) {
+            option.where = {
+                caption: {
+                    [Op.iLike]: `%${search}%`
+                }
+            }
+        }
+        Post.findAll(option)
+        .then(data => {
+            res.render('homePage', { data })
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static deletePost(req, res) {
-
+        const id = +req.params.id
+        Post.destroy({where: {id : id}})
+        .then((_) => {
+            res.redirect('/user/home')
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static renderAdminPage(req, res) {
