@@ -20,30 +20,33 @@
 
     <form method="post">
         <div class="container">
-
+  <<% data.forEach(x => { %>
+   
             <div class="form-group">
               <label for="username">UserName</label>
-              <input type="text" class="form-control" value="<%= data.userName %> " id="username" placeholder="username">
+              <input type="text" class="form-control" name="userName" value="<%= x.userName %> " id="username" placeholder="username">
             </div> <br>
 
             <div class="form-group">
               <label for="picture">Profile Picture</label>
-              <input type="text" class="form-control" value="<%= data.profilePicture %> " id="picture" placeholder="profile picture URL">
+              <input type="text" class="form-control" name="profilePicture" value="<%= x.profilePicture %> " id="picture" placeholder="profile picture URL">
             </div>
             <div class="form-group">
                 <label for="bio">Bio</label>
-                <input type="text" class="form-control" value="<%= data.bio %> " id="bio" placeholder="bio">
+                <input type="text" class="form-control" name="bio" value="<%= x.bio %> " id="bio" placeholder="bio">
               </div> 
   
               <div class="form-group">
                 <label for="number">Phone Number</label>
-                <input type="text" class="form-control" value="<%= data.phoneNumber %> "  id="number" placeholder="phone number">
+                <input type="text" class="form-control" name="phoneNumber" value="<%= x.phoneNumber %> "  id="number" placeholder="phone number">
               </div>
                 <div class="form-group">
               <label for="hobby">Hobby</label>
-              <input type="text" class="form-control" value="<%= data.hobby %> " id="hobby" placeholder="hobby">
+              <input type="text" class="form-control" name="hobby" value="<%= x.hobby %> " id="hobby" placeholder="hobby">
             </div>
         </div> <br>
+        <% }) %>
+
         <button type="submit" class="btn btn-outline-info" style="margin-left: 42% ;">Submit changes</button>
       </form>
 </body>

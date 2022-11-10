@@ -7,7 +7,8 @@ const { User, Profile, Post } = require('../models')
 
 class UserController {
     static renderRegister(req, res) {
-        res.render('register')
+        const errors = req.query.errors
+        res.render('register', { errors })
     }
 
     static handleRegister(req, res) {
@@ -28,12 +29,16 @@ class UserController {
                 res.redirect('/login')
             })
             .catch((err) => {
-                res.send(err)
+                if (err.name === 'SequelizeValidationError') {
+                    let errors = err.errors.map(x => x.message)
+                    res.redirect(`/register?errors=${errors}`)
+                }
             })
     }
 
-    static renderLogin(req, res) {
-        res.render('login')
+    static renderLogin(req, res) {  
+        const errors = req.query.errors
+        res.render('login', {errors} )
     }
 
     static handleLogin(req, res) {
@@ -53,7 +58,11 @@ class UserController {
                                     if(err) {
                                         res.send(err)
                                     }else {
-                                        res.redirect('/user/home')
+                                        if(req.session.role === 2) {
+                                            res.redirect('/user/home')
+                                        }else if(req.session.role === 1) {
+                                            res.redirect('/admin/home')
+                                        }
                                     }
                                 })
                             }
@@ -68,7 +77,10 @@ class UserController {
                 }
             })
             .catch((err) => {
-                res.send(err)
+                if (err.name === 'SequelizeValidationError') {
+                    let errors = err.errors.map(x => x.message)
+                    res.redirect(`/login?errors=${errors}`)
+                }
             })
     }
 
@@ -103,8 +115,26 @@ class UserController {
     }
 
     static renderAdminPage(req, res) {
-
+        Post.findAll()
+        .then(data => {
+            res.render('adminPage', { data })
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
+
+    static deleteAsAdmin(req, res) {
+        const id = +req.params.id
+        Post.destroy({ where: { id: id } })
+            .then((_) => {
+                res.redirect('/admin/home')
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
+
 }
 
 module.exports = UserController

@@ -3,50 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <h2>Register</h2>
-    <div>
-        <form action="/register", method="post"> 
-            <div>
-                <label>Email</label>
-                <input type="email" name="email">
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" name="password">
-            </div>
-              <div>
-                <label>username</label>
-                <input type="text" name="userName">
-            </div>
-            <div>
-                <label>profile picture</label>
-                <input type="text" name="profilePicture">
-            </div>
-            <div>
-                <label>bio</label>
-                <input type="text" name="bio">
-            </div>
-            <div>
-                <label>phone number</label>
-                <input type="number" name="phoneNumber">
-            </div>
-            <div>
-                <label>birth date</label>
-                <input type="date" name="birthDate">
-            </div>
-            <div>
-                <label>hobby</label>
-                <input type="text" name="hobby">
+    <h1 style="margin-left:32%">Register your Account</h1>
+    <form  method="post">
+        <div class="container">
+
+          <div class="form-group">
+            <label for="email"><b>email</b></label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password"><b>password</b></label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="password">
+          </div>
+
+            <div class="form-group">
+              <label for="username"><b>UserName</b></label>
+              <input type="text" class="form-control" name="userName" id="username" placeholder="username">
             </div>
 
+            <div class="form-group">
+              <label for="picture"> <b>Profile Picture</b></label>
+              <input type="url" class="form-control" name="profilePicture" id="picture" placeholder="profile picture URL">
+            </div>
+            <div class="form-group">
+                <label for="bio"><b>bio</b></label>
+                <input type="text" class="form-control" name="bio" id="bio" placeholder="bio">
+              </div> 
+  
+              <div class="form-group">
+                <label for="number"><b>Phone Number</b></label>
+                <input type="number" class="form-control" name="phoneNumber" id="number" placeholder="phone number">
+              </div>
 
-           
-            <input type="submit" value="Register">
-        </form>
-    </div>
+              <div class="form-group">
+                <label for="birth"><b>Birth Date</b></label>
+                <input type="date" class="form-control" name="birthDate" id="birth" placeholder="phone number">
+              </div>
+
+              <br>
+                <div class="form-group">
+                  <label for="cars"><b>Choose your Hobby:</b></label> 
+
+                  <select name="hobby">
+                    <option value="" selected>Choose one.</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Musik">Musik</option>
+                    <option value="Melukis">Melukis</option>
+                    <option value="Ngoding">Ngoding</option>
+                    <option value="Ngoding">Game</option>
+                  </select>
+                  
+            </div>
+        </div> 
+      <button type="submit" class="btn btn-outline-info" style="margin-left: 45%">Submit</button>
+      </form>
 </body>
 </html>

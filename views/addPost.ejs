@@ -8,6 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+    <% if (errors) { %>
+        <% errors.split(',').forEach( x=> { %>
+          <p style="color: red; margin-left: 50px;">
+            <%= x %>
+          </p>
+          <% }) %>
+            <% } %>
         <form action="" method="post">
             <div class="form-floating" style="margin-top: 30px;">
                 <textarea name="caption" class="form-control" style="width:600px; height: 60px;" id="caption" maxlength="255" cols="30" rows="10"></textarea> <br> 

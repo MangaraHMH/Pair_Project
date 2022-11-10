@@ -25,23 +25,28 @@ router.get('/user/home', UserController.renderHomePage)
 router.get('/user/profile', ProfileController.renderUserProfile)
 router.get('/user/addpost', ProfileController.renderAddPost)
 router.post('/user/addpost', ProfileController.addPost)
-router.get('/user/profile/edit/:id', ProfileController.renderEditPost)
-router.post('/user/profile/edit/:id', ProfileController.editPost)
+router.get('/user/profile/edit/:id', ProfileController.renderEditProfile)
+router.post('/user/profile/edit/:id', ProfileController.editProfile)
 router.get('/user/delete/:id', UserController.deletePost)
 
 
-//MIDDLEWARE ADMIN
-router.use((req, res, next) => {
-    if (req.session.role = 2) {
-        res.redirect('/user/home')
-    } else {
-        next()
-    }
-})
 
 //ADMIN
 router.get('/admin/home', UserController.renderAdminPage)
+router.get('/admin/delete/:id', UserController.deleteAsAdmin)
 
+//MIDDLEWARE ADMIN
+router.use((req, res, next) => {
+    if (req.session.role === 2) {
+        res.redirect('/user/home')
+    } 
+    else if (req.session.role === 1) {
+        res.redirect('admin/home')
+    }
+    else if(req.session.role === 1){
+        next()
+    }
+})
 
 
 
