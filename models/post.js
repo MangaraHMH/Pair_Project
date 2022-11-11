@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
@@ -13,6 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Post.belongsTo(models.User)
     }
+
+    static getSearch(search) {
+      return {
+        caption: {
+          [Op.iLike]: `%${search}%`
+        }
+      }
+    }
+
   }
   Post.init({
     caption: {
@@ -20,12 +29,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: {
-          msg:'Please add your caption'
+          msg: 'Please add your caption'
         },
         notEmpty: {
-          msg:'Please add your caption'
+          msg: 'Please add your caption'
         }
-  
+
       }
     },
     like: DataTypes.INTEGER,

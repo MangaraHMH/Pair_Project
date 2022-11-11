@@ -12,6 +12,7 @@ router.get('/register', UserController.renderRegister)
 router.post('/register', UserController.handleRegister)
 router.get('/login', UserController.renderLogin)
 router.post('/login', UserController.handleLogin)
+router.get('/user/logout', UserController.logout)
 
 //MIDDLEWARE USER
 router.use((req, res, next) => {

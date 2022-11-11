@@ -1,9 +1,7 @@
-
 const bcrypt = require('bcryptjs')
-
 const { Op } = require('sequelize')
 const { User, Profile, Post } = require('../models')
-
+const {sendEmail} = require('../helpers/nodemailer')
 
 class UserController {
     static renderRegister(req, res) {
@@ -49,13 +47,13 @@ class UserController {
                     const validPassword = bcrypt.compareSync(password, data.password)
                     if (validPassword) {
                         req.session.regenerate(err => {
-                            if(err) {
+                            if (err) {
                                 res.send(err)
-                            }else {
+                            } else {
                                 req.session.UserId = data.id
                                 req.session.role = data.role
                                 req.session.save(err => {
-                                    if(err) {
+                                    if (err) {
                                         res.send(err)
                                     }else {
                                         if(req.session.role === 2) {
@@ -71,7 +69,7 @@ class UserController {
                         const error = 'Invalid Email/Password'
                         return res.redirect(`/login?error=${error}`)
                     }
-                }else {
+                } else {
                     const error = 'Invalid Email/Password'
                     return res.redirect(`/login?error=${error}`)
                 }
@@ -88,11 +86,7 @@ class UserController {
         const { search } = req.query
         const option = {}
         if (search) {
-            option.where = {
-                caption: {
-                    [Op.iLike]: `%${search}%`
-                }
-            }
+            option.where = Post.getSearch(search)
         }
         Post.findAll(option)
             .then(data => {
@@ -112,6 +106,16 @@ class UserController {
             .catch(err => {
                 res.send(err)
             })
+    }
+
+    static logout(req, res) {
+        req.session.destroy((err) => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.redirect('/')
+            }
+        })
     }
 
     static renderAdminPage(req, res) {
