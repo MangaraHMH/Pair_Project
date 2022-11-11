@@ -34,7 +34,7 @@ class ProfileController {
 
     static editProfile(req, res) {
         const id = +req.params.id
-        let { filename } = req.file
+        let { filename } = req.file 
         const { userName, bio, phoneNumber, birthDate, hobby} = req.body
         Profile.update({ userName, profilePicture:filename, bio, phoneNumber, birthDate, hobby }, {where :{UserId : id}})
         .then((_) => {
