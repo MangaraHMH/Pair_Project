@@ -6,5 +6,8 @@ const hashPassword = password => {
 
     return hash
 }
+const formatDate = date => {
+    
+}
 
 module.exports = {hashPassword}

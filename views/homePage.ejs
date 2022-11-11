@@ -12,34 +12,44 @@
     <nav class="navbar bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="https://toppng.com/uploads/preview/squidward-wallpaper-handsome-squidward-transparent-115633722416pqvpicdi6.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            Tweetward
+            <img src="https://www.kindpng.com/picc/m/553-5530904_phoenix-bird-hd-png-download.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Tweetwar
           </a>
-          <form class="d-flex" role="search" style="margin-right:90px ;">
-            <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info"type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg>
-              </button>
-          </form>  
-            <a href="/user/profile">My Profile</a>  
-          <a href="/user/logout" class="nav-link active">Logout</a>
+          <div class="ms-4">
+                <form class="d-flex" role="search" style="margin-right:90px ;">
+                    <input class="form-control me-2 d-flex justify-content-center" name="search" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-info"type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                      </svg>
+                      </button>
+                  </form>  
+
+            </div>
+            <div class="d-flex flex-rows">
+
+              <a class="me-4 nav-link active" href="/user/addpost" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+              </svg></a>    
+                <a class="me-4 nav-link active" href="/user/profile" >My Profile</a>    
+                <a href="" class="nav-link active">Logout</a>
+            
+          </div>
         </div>
-      </nav>
-    <div class="container">
+        </nav>
+        <div class="container">
             <% data.forEach(post => { %>
                 <div class="card mb-4">
                     <a href="/user/profile"><h5 class="card-header">Deden_bengkel</h5></a>
                     <div class="card-body">
                         <p class="card-text"><%= post.caption %> </p>
                         <div class="d-flex justify-content-between">
-                                <a href=""> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                                </svg></a> <p><%= post.like %> </p> 
-                                
-                               <a href="/user/delete/<%= post.id %>"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <a href=""> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg></a> <p><%= post.like %> </p> 
+                            
+                            <a href="/user/delete/<%= post.id %>"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                              </svg></a>
+                            </svg></a>
                         </div>
                     </div>
                 </div>
