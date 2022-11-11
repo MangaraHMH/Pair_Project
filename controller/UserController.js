@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const { Op } = require('sequelize')
 const { User, Profile, Post } = require('../models')
-const {sendEmail} = require('../helpers/nodemailer')
+const sendEmail = require('../helpers/nodemailer')
 
 class UserController {
     static renderRegister(req, res) {
@@ -40,6 +40,7 @@ class UserController {
     }
 
     static handleLogin(req, res) {
+        console.log('hi')
         const { email, password } = req.body
         User.findOne({ where: { email: email } })
             .then((data) => {
@@ -56,11 +57,17 @@ class UserController {
                                     if (err) {
                                         res.send(err)
                                     }else {
-                                        if(req.session.role === 2) {
-                                            res.redirect('/user/home')
-                                        }else if(req.session.role === 1) {
-                                            res.redirect('/admin/home')
-                                        }
+                                        sendEmail(data.email).then(() => {
+                                            if(req.session.role === 2) {
+                                                res.redirect('/user/home')
+                                            }else if(req.session.role === 1) {
+                                                res.redirect('/admin/home')
+                                            }
+                                        })
+                                        .catch((err) => {
+                                            console.log(err)
+                                        })
+                                        
                                     }
                                 })
                             }
@@ -88,7 +95,9 @@ class UserController {
         if (search) {
             option.where = Post.getSearch(search)
         }
-        Post.findAll(option)
+        Post.findAll(option, {
+            order: [['caption', 'DESC']]
+        })
             .then(data => {
                 res.render('homePage', { data })
             })

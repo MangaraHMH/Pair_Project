@@ -20,6 +20,30 @@ class ProfileController {
         })
     }
 
+    static like(req, res){
+        const id = req.params.id
+        Post.findOne({
+            where: {
+                id
+            }
+        })
+        .then((data)=>{
+            Post.update({
+                like: data.like + 1
+            },{
+                where: {
+                    id
+                }
+            })
+        })
+        .then(()=>{
+            res.redirect('/user/home')
+        })
+        .catch((err)=>{
+            res.send(err)
+        })
+    }
+
     static renderEditProfile(req, res) {
         const errors = req.query.errors
         const id = +req.params.id
