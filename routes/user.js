@@ -28,6 +28,7 @@ router.get('/user/home', UserController.renderHomePage)
 router.get('/user/profile', ProfileController.renderUserProfile)
 router.get('/user/addpost', ProfileController.renderAddPost)
 router.post('/user/addpost', ProfileController.addPost)
+router.get('/user/like', ProfileController.like)
 router.get('/user/delete/:id', UserController.deletePost)
 
 
