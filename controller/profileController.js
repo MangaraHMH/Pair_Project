@@ -15,29 +15,30 @@ class ProfileController {
         .catch(err => {
             if (err.name === 'SequelizeValidationError') {
                 let errors = err.errors.map(x => x.message)
-                res.redirect(`/?errors=${errors}`)
+                res.redirect(`/user/addpost?errors=${errors}`)
             }
         })
     }
 
-    static renderEditPost(req, res) {
+    static renderEditProfile(req, res) {
         const errors = req.query.errors
         const id = +req.params.id
-        Profile.findOne({where : {id: id}})
-        .then(data => {
-            res.render('editProfile', { data, errors})
-        })
-        .catch(err => {
-          res.send(err)
-        })
+        Profile.findAll({where: {UserId: id}})
+            .then(data => {
+                res.render('editProfile', { data, errors })
+            })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
-    static editPost(req, res) {
+    static editProfile(req, res) {
         const id = +req.params.id
-        const { userName, profilePicture, bio, phoneNumber, birthDate, hobby} = req.body
-        Profile.update({ userName, profilePicture, bio, phoneNumber, birthDate, hobby }, {where :{id : id}})
+        let { filename } = req.file
+        const { userName, bio, phoneNumber, birthDate, hobby} = req.body
+        Profile.update({ userName, profilePicture:filename, bio, phoneNumber, birthDate, hobby }, {where :{UserId : id}})
         .then((_) => {
-            res.redirect('/user/home')
+            res.redirect('/user/profile')
         })
         .catch(err => {
             if (err.name === 'SequelizeValidationError') {
