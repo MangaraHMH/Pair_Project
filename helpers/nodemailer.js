@@ -17,15 +17,15 @@ function sendEmail(email) {
 
     const option = {
         from: "tweetwar2022@gmail.com",
-        to: "tweetwar2022@gmail.com",
+        to: email,
         subject: "Acount Success Create",
         text: "Your Account has been create",
         html: "<b>Your Account has been create</b>"
     };
 
     return new Promise((resolve, reject) => {
-        transporter.sendMail(option, (err, info)=>{
-            if(err){
+        transporter.sendMail(option, (err, info) => {
+            if (err) {
                 console.log(err);
                 reject(err)
             }

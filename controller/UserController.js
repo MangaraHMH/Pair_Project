@@ -34,9 +34,9 @@ class UserController {
             })
     }
 
-    static renderLogin(req, res) {  
+    static renderLogin(req, res) {
         const errors = req.query.errors
-        res.render('login', {errors} )
+        res.render('login', { errors })
     }
 
     static handleLogin(req, res) {
@@ -56,18 +56,18 @@ class UserController {
                                 req.session.save(err => {
                                     if (err) {
                                         res.send(err)
-                                    }else {
+                                    } else {
                                         sendEmail(data.email).then(() => {
-                                            if(req.session.role === 2) {
+                                            if (req.session.role === 2) {
                                                 res.redirect('/user/home')
-                                            }else if(req.session.role === 1) {
+                                            } else if (req.session.role === 1) {
                                                 res.redirect('/admin/home')
                                             }
                                         })
-                                        .catch((err) => {
-                                            console.log(err)
-                                        })
-                                        
+                                            .catch((err) => {
+                                                console.log(err)
+                                            })
+
                                     }
                                 })
                             }
@@ -128,13 +128,20 @@ class UserController {
     }
 
     static renderAdminPage(req, res) {
-        Post.findAll()
-        .then(data => {
-            res.render('adminPage', { data })
+        const { search } = req.query
+        const option = {}
+        if (search) {
+            option.where = Post.getSearch(search)
+        }
+        Post.findAll(option, {
+            order: [['caption', 'DESC']]
         })
-        .catch(err => {
-            res.send(err)
-        })
+            .then(data => {
+                res.render('adminPage', { data })
+            })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
     static deleteAsAdmin(req, res) {

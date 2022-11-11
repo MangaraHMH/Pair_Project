@@ -33,11 +33,6 @@ router.get('/user/delete/:id', UserController.deletePost)
 
 
 
-//ADMIN
-router.get('/admin/home', UserController.renderAdminPage)
-router.get('/admin/delete/:id', UserController.deleteAsAdmin)
-
-
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -45,25 +40,26 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
-    } 
+    }
 })
 
-const upload = multer({storage : storage})
+const upload = multer({ storage: storage })
 router.get('/user/profile/edit/:id', ProfileController.renderEditProfile)
-router.post('/user/profile/edit/:id',upload.single('profilePicture'), ProfileController.editProfile)
+router.post('/user/profile/edit/:id', upload.single('profilePicture'), ProfileController.editProfile)
 
 //MIDDLEWARE ADMIN
 router.use((req, res, next) => {
     if (req.session.role === 2) {
         res.redirect('/user/home')
-    } 
-    else if (req.session.role === 1) {
-        res.redirect('admin/home')
-    }
-    else if(req.session.role === 1){
+    }else {
         next()
     }
 })
+
+
+//ADMIN
+router.get('/admin/home', UserController.renderAdminPage)
+router.get('/admin/delete/:id', UserController.deleteAsAdmin)
 
 
 
