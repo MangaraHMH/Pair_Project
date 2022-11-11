@@ -41,7 +41,7 @@ router.get('/admin/delete/:id', UserController.deleteAsAdmin)
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './assets')
+        cb(null, './public')
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
